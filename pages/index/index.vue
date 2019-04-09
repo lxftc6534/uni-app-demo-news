@@ -1,0 +1,62 @@
+<template>
+	<view class="content">
+        <view class="uni-list">
+        	<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item,index) in list" :key="index"
+			@tap=showInfo(item)>
+        		<view class="uni-media-list">
+        			<image class="uni-media-list-logo" :src="item.author_avatar"></image>
+        			<view class="uni-media-list-body">
+        				<view class="uni-media-list-text-top">{{item.title}}</view>
+        				<view class="uni-media-list-text-bottom uni-ellipsis">{{item.created_at}}</view>
+        			</view>
+        		</view>
+        	</view>
+        </view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				list:[],
+			}
+		},
+		onLoad:function(){
+			uni.showLoading({
+				title: '加载中...',
+				mask: true
+			});
+			uni.request({
+				url: 'https://unidemo.dcloud.net.cn/api/news',
+				method: 'GET',
+				data: {},
+				success: res => {
+					console.log(res);
+					this.list=res.data;
+				},
+				fail: () => {},
+				complete: () => {
+					uni.hideLoading();
+				}
+			});
+		},
+		methods: {
+			showInfo(item) {
+				console.log(item)
+				uni.navigateTo({
+					url: '../info/info?id='+item.post_id
+				});
+			}
+		},
+	}
+</script>
+
+<style>
+	.uni-media-list-body{
+		height: auto;
+	}
+	.uni-media-list-body,.uni-media-list-text-top,.uni-media-list-text-bottom{
+		line-height: 1.2;
+	}
+</style>

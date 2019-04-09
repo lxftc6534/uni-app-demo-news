@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"uni-media-list-body{ height: auto; }\n.",[1],"uni-media-list-body,.",[1],"uni-media-list-text-top,.",[1],"uni-media-list-text-bottom{ line-height: 1.2; }\n",],undefined,{path:"./pages/index/index.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/index/index.wxml') } }));
